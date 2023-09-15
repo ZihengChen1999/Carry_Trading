@@ -28,3 +28,6 @@ In-sample peiord is from 2000 to 2014, and from 2014 to 2023 are out-of-sample p
 The summary statistics are in the file test_strategy_performance.csv and train_strategy_performance.csv and the total PnL are plotted under folder plots.
 
 
+5. Suspectable Data Point
+
+After checking the data, the data point of 2022-06-20 within asset_1 is highly suspectable, it is using U2022, which is the same as the contract in our asset_2, so I will drop this data point for now, and we can do further investigation later
