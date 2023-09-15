@@ -1,9 +1,9 @@
 1. Rebalancing method
 
 To implement the carry trading using asset_1 and asset_2, I open positions of new asset_2 using close price of the first day we use the new pair of contracts,
-and I close positions using the close price of the last day we were using the old pair of contracts. 
+and I close all positions using the close price of the last day we were using the old pair of contracts. 
 
-So, we do not hold positions the first day we change pair of contracts, and we hold the positions for around one month, and rebalance before and after we change contract pairs.
+So, we do not hold positions the first day we change pair of contracts, and we hold the positions for around one month, and rebalance before and after we change contract pairs. Trading cost is paid when we open positions.
 
 2. Signal Construction
 
@@ -17,7 +17,9 @@ I assumed that I have a free capital of 10M, and I would risk more when my signa
 If Z-score is [0.5, 1], I will risk 1% of my free capital to short asset_2
 If Z-score is [1, 2], I will risk 3% of my free capital to short asset_2
 If Z-score is [2, x], I will risk 6% of my free capital to short asset_2
-When the Z score is smaller than 0, I will go long, but the bet size is the same as the above
+When the Z score is smaller than 0, I will go long, but the bet size is the same as the above.
+
+The number of contracts I buy contracts using int((bet_size * TOTAL_CAPITAL)/(CONTRACT_SIZE * asset_1_close))
 
 4. Performance Summary
 
