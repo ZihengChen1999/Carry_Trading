@@ -1,0 +1,30 @@
+1. Rebalancing method
+
+To implement the carry trading using asset_1 and asset_2, I open positions of new asset_2 using close price of the first day we use the new pair of contracts,
+and I close positions using the close price of the last day we were using the old pair of contracts. 
+
+So, we do not hold positions the first day we change pair of contracts, and we hold the positions for around one month, and rebalance before and after we change contract pairs.
+
+2. Signal Construction
+
+Alpha signals are the rolling Z-score of asset_2_close/asset_1_close. Multiple hyperparameters for the rollingw windows are used.
+
+
+3. Bet Sizing
+
+I assumed that I have a free capital of 10M, and I would risk more when my signal is stronger.
+
+If Z-score is [0.5, 1], I will risk 1% of my free capital to short asset_2
+If Z-score is [1, 2], I will risk 3% of my free capital to short asset_2
+If Z-score is [2, x], I will risk 6% of my free capital to short asset_2
+When the Z score is smaller than 0, I will go long, but the bet size is the same as the above
+
+4. Performance Summary
+
+Dollar return, dollar std, dollar maimum drawdown and sharpe ratios are calculated for different hyperparameters and are evaluated both in-sample and out-of-sample. 
+
+In-sample peiord is from 2000 to 2014, and from 2014 to 2023 are out-of-sample period.
+
+The summary statistics are in the file test_strategy_performance.csv and train_strategy_performance.csv and the total PnL are plotted under folder plots.
+
+

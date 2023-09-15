@@ -99,12 +99,12 @@ def sizing_and_PnL(prepared_train_with_alpha_signal, TOTAL_CAPITAL, CONTRACT_SIZ
 
     # Add a column showing the bet size based on the Z-score
     prepared_train_with_alpha_signal['bet_size'] = 0
-    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < 1) & (prepared_train_with_alpha_signal['z_score'] > 0.5), 'bet_size'] = -0.1
-    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < 2) & (prepared_train_with_alpha_signal['z_score'] >= 1.0), 'bet_size'] = -0.2
-    prepared_train_with_alpha_signal.loc[prepared_train_with_alpha_signal['z_score'] >= 2, 'bet_size'] = -0.4
-    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < -0.5) & (prepared_train_with_alpha_signal['z_score'] >= -1), 'bet_size'] = 0.1
-    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < -1.0) & (prepared_train_with_alpha_signal['z_score'] >= -2), 'bet_size'] = 0.2
-    prepared_train_with_alpha_signal.loc[prepared_train_with_alpha_signal['z_score'] < -2, 'bet_size'] = 0.4
+    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < 1) & (prepared_train_with_alpha_signal['z_score'] > 0.5), 'bet_size'] = -0.01
+    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < 2) & (prepared_train_with_alpha_signal['z_score'] >= 1.0), 'bet_size'] = -0.03
+    prepared_train_with_alpha_signal.loc[prepared_train_with_alpha_signal['z_score'] >= 2, 'bet_size'] = -0.06
+    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < -0.5) & (prepared_train_with_alpha_signal['z_score'] >= -1), 'bet_size'] = 0.01
+    prepared_train_with_alpha_signal.loc[(prepared_train_with_alpha_signal['z_score'] < -1.0) & (prepared_train_with_alpha_signal['z_score'] >= -2), 'bet_size'] = 0.03
+    prepared_train_with_alpha_signal.loc[prepared_train_with_alpha_signal['z_score'] < -2, 'bet_size'] = 0.06
 
     prepared_train_with_alpha_signal['contract_number'] = 0
 
