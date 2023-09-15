@@ -21,7 +21,7 @@ When the Z score is smaller than 0, I will go long, but the bet size is the same
 
 4. Performance Summary
 
-Dollar return, dollar std, dollar maimum drawdown and sharpe ratios are calculated for different hyperparameters and are evaluated both in-sample and out-of-sample. 
+Dollar return, dollar std, dollar maximum drawdown and sharpe ratios are calculated for different hyperparameters and are evaluated both in-sample and out-of-sample. 
 
 In-sample peiord is from 2000 to 2014, and from 2014 to 2023 are out-of-sample period.
 
