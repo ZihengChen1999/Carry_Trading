@@ -6,10 +6,6 @@ import matplotlib.pyplot as plt
 asset_1 = pd.read_csv('asset_1.csv', index_col='date')
 asset_2 = pd.read_csv('asset_2.csv', index_col='date')
 ######################
-TOTAL_CAPITAL = 10000000
-CONTRACT_SIZE = 1000
-T_COST = 0.01
-
 index = asset_1.index.difference(asset_2.index)
 # Drop this data point, it seems wrong. Further investigation later.
 asset_1.drop(['2022-06-20'], inplace=True)
@@ -21,7 +17,7 @@ assets['contract_change'] = assets['asset_2_ticker'] != assets['asset_2_ticker']
 
 train_df = assets.loc[:'2014-01-01',:].copy()
 test_df = assets.loc["2014-01-01":, :].copy()
-######################
+
 def alpha_signal(df, rolling_window=10):
     df['raw_signal'] = df['asset_2_close']/df['asset_1_close']
     df["alpha_signal"] = df['raw_signal'].rolling(rolling_window).apply(lambda x:(x[-1] - x.mean())/x.std())
@@ -63,10 +59,11 @@ def performance_summary(df):
 
 def backtesting(df, rollingwindows, folder_name="train_results"):
     PnLs = pd.DataFrame([])
-    PnL_summary = pd.DataFrame(columns=['rolling_window', 'sharpe_ratio', 'annualized_dollar_return', 'annualized_dollar_volatility', 'max_dollar_drawdown'])
+    PnL_summary = pd.DataFrame([])
     for rolling_window in rollingwindows:
         alpha_signal(df, rolling_window)
         signal_to_portfolio(df)
+        print(df)
         portfolio_to_PnL(df)
         sharpe_ratio, annualized_dollar_return, annualized_dollar_volatility, max_drawdown = performance_summary(df)
         PnLs = pd.concat([PnLs, df['total_PnL']], axis=1)
@@ -85,6 +82,9 @@ def backtesting(df, rollingwindows, folder_name="train_results"):
 ####################
 
 ROLLING_WINDOWS = [5, 10, 20, 30, 100]
+TOTAL_CAPITAL = 10000000
+CONTRACT_SIZE = 1000
+T_COST = 0.01
 backtesting(train_df, ROLLING_WINDOWS)
 backtesting(test_df, ROLLING_WINDOWS, folder_name="test_results")
     
